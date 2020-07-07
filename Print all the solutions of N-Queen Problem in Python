@@ -1,0 +1,50 @@
+import math
+
+s=0
+n=int(input())
+t=[-1]*n
+
+def display():
+    global t,n
+    chess=[[]]
+    chess = [[0 for i in range(n)] for j in range(n)] 
+    for i in range(n):
+        for j in range(n):
+            chess[i][j]="."
+    for i in range(n):
+        chess[i][t[i]]="Q"
+    for i in range(n):
+        for j in range(n):
+            print(chess[i][j],end="  ")      
+        print("\n") 
+        
+def safe(i):
+    global t
+    j=0
+    while t[i]!=t[j] and abs(t[i]-t[j])!=abs(i-j):
+        j=j+1
+    if i==j:
+        return 1
+    else:
+        return 0
+    
+
+def nqueen(i):
+    global t,s
+    for t[i] in range(n):
+        if safe(i):
+            if i==n-1:
+                s=s+1
+                print("Solution {} is:".format(s))
+                display()
+            else:
+                nqueen(i+1)
+                
+
+    
+
+def run_it():
+    nqueen(0)
+    
+    
+run_it()
